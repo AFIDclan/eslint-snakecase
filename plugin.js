@@ -11,8 +11,14 @@ module.exports = {
         create(context) {
           const source_code = context.getSourceCode();
   
-          const is_snake_case = (name) => /^[a-z]+(_[a-z]+)*$/.test(name);
-  
+          // const is_snake_case = (name) => /^[a-z]+(_[a-z]+)*$/.test(name);
+          const is_snake_case = (name) => {
+            return (
+              /^_*[a-z]+(_[a-z]+)*$/.test(name) || // all lowercase snake_case
+              /^_*[A-Z]+(_[A-Z]+)*$/.test(name)    // all uppercase SNAKE_CASE
+            );
+          };
+
           const check_identifier = (node, name) => {
             if (!is_snake_case(name)) {
               const snake_name = name
@@ -28,7 +34,7 @@ module.exports = {
                 references = variable.references;
               } else {
                 // For parameters and function names
-                const variables = context.getDeclaredVariables(node);
+                const variables = source_code.getDeclaredVariables(node);
                 if (variables.length > 0) {
                   references = variables[0].references;
                 }

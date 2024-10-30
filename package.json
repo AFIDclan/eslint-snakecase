@@ -1,6 +1,6 @@
 {
   "name": "@novadynamics/eslint-snakecase",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "eslint plugin for enforcing snake_case naming convention for local identifiers",
   "main": "plugin.js",
   "scripts": {
